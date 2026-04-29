@@ -21,7 +21,7 @@ The purpose of this application is to demonstrate how to build a full stack appl
 
 This project uses **pnpm workspaces** and **Turborepo**.
 
-```
+```text
 graphql-course-starter/
 ├── apps/
 │   ├── client/   → React frontend (react-scripts, Apollo Client, Tailwind)
@@ -35,7 +35,7 @@ graphql-course-starter/
 ## Common Commands
 
 | Command | What it does |
-|---|---|
+| --- | --- |
 | `pnpm dev` | Start both client and server concurrently |
 | `pnpm build` | Build all workspaces via Turborepo |
 | `pnpm test` | Run all workspace tests |

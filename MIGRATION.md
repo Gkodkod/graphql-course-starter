@@ -21,7 +21,7 @@ Convert the project from a flat npm app into a proper pnpm workspace monorepo wi
 
 ## New Directory Structure
 
-```
+```text
 graphql-course-starter/
 ├── apps/
 │   ├── client/               ← React frontend
@@ -56,7 +56,7 @@ graphql-course-starter/
 ### Root
 
 | File | Change |
-|---|---|
+| --- | --- |
 | `package.json` | Replaced — stripped to workspace shell with only `turbo` as a devDependency and top-level `dev`, `build`, `test`, `codegen` scripts |
 | `turbo.json` | Created — defines task pipeline for `start`, `build`, `test:fe`, `test:be`, `codegen`, `seed`, `migrate` |
 | `.gitignore` | Updated — removed leading `/` from `node_modules`/`coverage`/`build` patterns (so they match all workspace subdirectories), added `.turbo` and `pnpm-debug.log*`, changed `.dev.db` to `*.db` glob |
@@ -75,7 +75,7 @@ graphql-course-starter/
 ### `apps/client` (new workspace)
 
 | File | Details |
-|---|---|
+| --- | --- |
 | `package.json` | Name: `@graphql-course/client`. All frontend deps: React, react-scripts, Apollo Client, router, Headless UI, Heroicons, Framer Motion, Tailwind, testing libs, codegen plugins, `@myorg/utils: workspace:*` |
 | `tsconfig.json` | Identical to original root tsconfig — targets browser (`dom`, `esnext`, `react-jsx`) |
 | `jest.fe.config.js` | `jest-fixed-jsdom` environment, matches `src/**/*.test.ts?(x)` |
@@ -86,7 +86,7 @@ graphql-course-starter/
 ### `apps/server` (new workspace)
 
 | File | Details |
-|---|---|
+| --- | --- |
 | `package.json` | Name: `@graphql-course/server`. All backend deps: Apollo Server, Express, GraphQL, Prisma, JWT, DataLoader, Zod, tsx, Sentry, ws, `@myorg/utils: workspace:*` |
 | `tsconfig.json` | New — Node-targeted: `target: ES2020`, `module: commonjs`, includes all server files |
 | `jest.be.config.js` | `node` environment, `testMatch: **/*.test.ts` (relative to server workspace root) |
@@ -94,7 +94,7 @@ graphql-course-starter/
 ### `packages/utils` (new workspace)
 
 | File | Details |
-|---|---|
+| --- | --- |
 | `package.json` | Name: `@myorg/utils`, `version: 0.0.1`, `main: index.ts` — satisfies the `workspace:*` reference in both apps |
 | `index.ts` | Empty stub export — ready to be populated with shared helpers |
 
@@ -121,7 +121,7 @@ graphql-course-starter/
 ## Dependency Split
 
 | Package | Workspace |
-|---|---|
+| --- | --- |
 | `react`, `react-dom`, `react-scripts` | `apps/client` |
 | `@apollo/client`, `react-router-dom` | `apps/client` |
 | `@headlessui/react`, `@heroicons/react`, `framer-motion` | `apps/client` |

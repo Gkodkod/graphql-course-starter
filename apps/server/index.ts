@@ -3,7 +3,7 @@
 import "./instrument";
 import * as Sentry from "@sentry/node";
 import { ApolloServer } from "@apollo/server";
-import { expressMiddleware } from "@apollo/server/express4";
+import { expressMiddleware } from "@as-integrations/express5";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
