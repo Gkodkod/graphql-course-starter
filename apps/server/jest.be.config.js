@@ -1,7 +1,7 @@
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
-  testMatch: ["**/server/**/*.test.ts"], // Adjust the path to match your backend test files
+  testMatch: ["**/*.test.ts"], // matches test files within the server workspace
   transform: {
     "\\.(graphql)$": "@graphql-tools/jest-transform",
     "^.+\\.ts?$": [

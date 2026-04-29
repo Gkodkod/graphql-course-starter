@@ -1,0 +1,28 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["build/**", "dist/**"]
+    },
+    "start": {
+      "cache": false,
+      "persistent": true
+    },
+    "test:fe": {
+      "cache": false
+    },
+    "test:be": {
+      "cache": false
+    },
+    "codegen": {
+      "outputs": ["src/**/__generated__/**", "src/types/graphql.ts", "src/types/schema.json", "src/types/mock-resolvers.ts"]
+    },
+    "seed": {
+      "cache": false
+    },
+    "migrate": {
+      "cache": false
+    }
+  }
+}
