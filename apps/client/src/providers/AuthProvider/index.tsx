@@ -9,7 +9,6 @@ import {
 } from "./queries.generated";
 import client from "../../client";
 import { UserRole } from "../../types/graphql";
-import { useNavigate } from "react-router-dom";
 
 export interface SignupInput {
   email: string;

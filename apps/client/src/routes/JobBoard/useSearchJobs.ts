@@ -3,7 +3,7 @@ import { useSearchJobsQuery } from "./queries.generated";
 
 const useSearchJobs = () => {
   const [search, setSearch] = useState("");
-  const { data, previousData, loading } = useSearchJobsQuery({
+  const { data, previousData, loading, error } = useSearchJobsQuery({
     variables: {
       input: {
         query: search,
@@ -12,6 +12,14 @@ const useSearchJobs = () => {
     fetchPolicy: "cache-and-network",
     notifyOnNetworkStatusChange: true, // This enables access to previousData
   });
+
+  if (error) {
+    console.error("Apollo Query Error:", error);
+  }
+
+  if (data) {
+    console.log("Apollo Query Data:", JSON.stringify(data, null, 2));
+  }
 
   const results = useMemo(() => {
     return data?.searchJobs || previousData?.searchJobs || [];

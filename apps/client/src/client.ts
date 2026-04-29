@@ -1,6 +1,7 @@
 import {
   ApolloClient,
   InMemoryCache,
+  ApolloLink,
   createHttpLink,
   split,
 } from "@apollo/client";
@@ -8,9 +9,6 @@ import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 // Uncomment to enable persisted queries
-// import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries";
-// import { sha256 } from "crypto-hash";
-
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
   credentials: "include", // Important for cookies
@@ -42,8 +40,13 @@ const splitLink = split(
   // persistedHttpLink
 );
 
+const loggerLink = new ApolloLink((operation, forward) => {
+  process.stdout.write(`Apollo Operation: ${operation.operationName} (${operation.query.definitions[0].kind})\n`);
+  return forward(operation);
+});
+
 const client = new ApolloClient({
-  link: splitLink,
+  link: loggerLink.concat(splitLink),
   cache: new InMemoryCache(),
 });
 

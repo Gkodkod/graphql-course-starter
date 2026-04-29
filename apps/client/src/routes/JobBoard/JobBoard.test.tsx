@@ -6,16 +6,25 @@ import { createMockServer } from "../../test-utils/mockServer";
 const mockServer = createMockServer();
 
 describe("JobBoard", () => {
-  beforeAll(() => mockServer.listen());
+  beforeAll(() => mockServer.listen({ onUnhandledRequest: "error" }));
   afterEach(() => mockServer.resetHandlers());
   afterAll(() => mockServer.close());
 
   it("shows the job title in the job card", async () => {
     mockServer.addMocks({
+      Job: () => ({
+        id: "1",
+        title: "Software Engineer",
+        location: "London",
+        type: "FULL_TIME",
+        remote: true,
+        salary: 100000,
+        company: { id: "c1", name: "Acme Corp" },
+        createdAt: new Date().toISOString(),
+        isApplied: false,
+      }),
       Query: {
-        searchJobs: () => {
-          return [{ id: "1", title: "Software Engineer" }];
-        },
+        searchJobs: () => [{}],
       },
     });
 
@@ -30,13 +39,22 @@ describe("JobBoard", () => {
     const applyForJobMock = jest.fn();
 
     mockServer.addMocks({
+      Job: () => ({
+        id: "1",
+        title: "Software Engineer",
+        location: "London",
+        type: "FULL_TIME",
+        remote: true,
+        salary: 100000,
+        company: { id: "c1", name: "Acme Corp" },
+        createdAt: new Date().toISOString(),
+        isApplied: false,
+      }),
       Query: {
-        searchJobs: () => {
-          return [{ id: "1", title: "Software Engineer", isApplied: false }];
-        },
+        searchJobs: () => [{}],
       },
       Mutation: {
-        applyForJob: (args) => {
+        applyForJob: (args: { input: { id: string } }) => {
           applyForJobMock(args);
           return true;
         },

@@ -9,7 +9,7 @@ const formatInputErrors = (error: unknown) => {
     if (inputError) {
       const zodError = inputError as ZodError;
       return zodError.issues.map(
-        (issue) => issue.path.join(".") + ": " + issue.message
+        (issue: any) => issue.path.join(".") + ": " + issue.message
       );
     }
   }
@@ -39,7 +39,7 @@ const Error = (props: IErrorProps) => {
       <p className="text-red-600 font-medium text-sm">
         Please fix the following {inputErrors?.length} errors:
       </p>
-      {inputErrors.map((error) => (
+      {inputErrors.map((error: string) => (
         <Badge key={error} color="red">
           {error}
         </Badge>
